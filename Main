@@ -1,0 +1,36 @@
+package com.company;
+import java.io.IOException;
+import java.util.Scanner;
+
+class Main {
+
+    public static void main(String[] args) throws IOException {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Input:");
+
+        String v = sc.nextLine();
+        String[] arr = v.split(" ");
+
+        if(arr.length != 3)
+            throw new IOException("Введено неподходящее количество чисел!");
+
+        String a = arr[0];
+        String b = arr[1];
+        String c = arr[2];
+
+        sc.close();
+
+        Count built = new Count(a, b, c);
+        built.setFirst(Count.toArabic(a));
+        built.setSign(b);
+        built.setSecond(Count.toArabic(c));
+
+        int result = Count.calculation(Count.parseString(built.getFirst()), b, Count.parseString(Count.getSecond()));
+        built.setFirst(a);
+        built.setSecond(c);
+        Count.checkingNotation(built.getFirst(),Count.getSecond());
+        System.out.println("Output:\n" + Count.isRoman(result));
+    }
+}
